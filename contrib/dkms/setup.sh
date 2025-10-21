@@ -25,15 +25,16 @@ if [[ $(pwd) != *"/contrib/dkms" ]]; then
 	exit
 fi
 
-echo "Updating packages..."
-apt update && apt full-upgrade -y && \
-apt install -y cron curl dkms gcc git htop iotop open-iscsi pandoc postfix pv screen sdparm sudo wget && \
-./install.sh
-
 echo "Blacklisting hpwdt..."
 echo "blacklist hpwdt" >> /etc/modprobe.d/blacklist-hp.conf
+echo "/etc/modprobe.d/blacklist-hp.conf: "
 cat /etc/modprobe.d/blacklist-hp.conf
 
 echo "Updating initramfs, grub..."
 update-initramfs -k all -u
 proxmox-boot-tool refresh || update-grub
+
+echo "Updating packages..."
+apt update && apt full-upgrade -y && \
+apt install -y cron curl dkms gcc git htop iotop open-iscsi pandoc postfix pv screen sdparm sudo wget && \
+./install.sh

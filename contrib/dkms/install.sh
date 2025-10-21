@@ -45,6 +45,11 @@ fi
 echo "installing new kernel module"
 dkms add ./
 dkms install --force hpsa-dkms/10.0
+
+modprobe -r hpsa
+modprobe hpsa hpsa_use_nvram_hba_flag=1
+echo "options hpsa hpsa_use_nvram_hba_flag=1" > /etc/modprobe.d/hpsa.co
+
 update-initramfs -u
 
 if (dkms status | grep -q "hpsa-dkms.*10.0") then

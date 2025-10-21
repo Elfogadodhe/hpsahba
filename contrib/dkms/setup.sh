@@ -3,8 +3,7 @@ echo -e "This script sets up the symbolic link for the kernel module and updates
 
 #check if confirmed
 read -r -p "Before you proceed with this script set up the PVE repositories and run apt-get dist-upgrade first, \
-reboot the system if needed and purge old kernel versions. \
-Do you wish to proceed? [y/N] " response
+reboot the system if needed and purge old kernel versions.\nDo you wish to proceed? [y/N] " response
 response=${response,,}  # convert to lowercase
 
 if [[ ! "$response" =~ ^(y|yes|Y)$ ]]; then
@@ -25,8 +24,11 @@ if [[ $(pwd) != *"/contrib/dkms" ]]; then
 	exit
 fi
 
+#creating symlink
+ln -s ~/hpsahba/kernel/5.18-patchset-v2 6.14-patchset-v2
+
 echo "Blacklisting hpwdt..."
-echo "blacklist hpwdt" >> /etc/modprobe.d/blacklist-hp.conf
+echo "blacklist hpwdt" > /etc/modprobe.d/blacklist-hp.conf
 echo "/etc/modprobe.d/blacklist-hp.conf: "
 cat /etc/modprobe.d/blacklist-hp.conf
 

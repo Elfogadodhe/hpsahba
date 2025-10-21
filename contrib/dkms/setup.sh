@@ -1,9 +1,10 @@
 #!/bin/bash
 echo -e "This script sets up the symbolic link for the kernel module and updates/installs missing packages.\n"
-echo ""
 
 #check if confirmed
-read -r -p "Before you proceed with this script run apt-get dist-upgrade first, reboot the system if needed and purge old kernel versions. Do you wish to proceed? [y/N] " response
+read -r -p "Before you proceed with this script set up the PVE repositories and run apt-get dist-upgrade first, \
+reboot the system if needed and purge old kernel versions. \
+Do you wish to proceed? [y/N] " response
 response=${response,,}  # convert to lowercase
 
 if [[ ! "$response" =~ ^(y|yes|Y)$ ]]; then
@@ -26,7 +27,7 @@ fi
 
 echo "Updating packages..."
 apt update && apt full-upgrade -y && \
-apt install -y cron curl dkms gcc git htop iotop open-iscsi pandoc postfix screen sdparm sudo wget && \
+apt install -y cron curl dkms gcc git htop iotop open-iscsi pandoc postfix pv screen sdparm sudo wget && \
 ./install.sh
 
 echo "Blacklisting hpwdt..."
@@ -35,4 +36,4 @@ cat /etc/modprobe.d/blacklist-hp.conf
 
 echo "Updating initramfs, grub..."
 update-initramfs -k all -u
-update-grub
+proxmox-boot-tool refresh || update-grub

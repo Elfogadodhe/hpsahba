@@ -17,8 +17,6 @@
 * apt install pve-headers-$(uname -r)
 * apt install make gcc git pandoc wget sudo htop iotop sdparm screen postfix open-iscsi curl dkms gh
 
-
-
 # NAME
 
 **hpsahba** - tool to enable/disable HBA mode on some HP Smart Array
@@ -31,7 +29,6 @@ controllers. This fork comes with various improvements and bugfixes, compared to
 
 It does not break existing compatibility and can easily be extended by support for other distros and kernels. 
  
-
 # SYNOPSIS
 
 * hpsahba -h

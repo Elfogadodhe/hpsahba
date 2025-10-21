@@ -1,3 +1,9 @@
+# SETUP
+
+```bash
+./setup.sh
+```
+
 # CHEETSHEET
 
 * echo "blacklist hpwdt" >> /etc/modprobe.d/blacklist-hp.conf

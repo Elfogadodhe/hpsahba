@@ -25,7 +25,7 @@ if [[ $(pwd) != *"/contrib/dkms" ]]; then
 fi
 
 #creating symlink
-ln -s ~/hpsahba/kernel/5.18-patchset-v2 6.14-patchset-v2
+ln -s ~/hpsahba/kernel/5.18-patchset-v2 ~/hpsahba/kernel/6.14-patchset-v2
 
 echo "Blacklisting hpwdt..."
 echo "blacklist hpwdt" > /etc/modprobe.d/blacklist-hp.conf
